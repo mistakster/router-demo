@@ -30,12 +30,11 @@ const Person = ({ id }) => {
                     {(panels, { add, remove }) => (
                         <div>
                             <Collapse>
-                                {panels.map((panel, index) => (
-                                    <Collapse.Panel key={index} header={`Panel #${index}`}>
+                                {panels.map(({ name }) => (
+                                    <Collapse.Panel key={name} header={`Panel #${name}`}>
                                         <MySuperControl
-                                            key={index}
-                                            panel={panel}
-                                            onRemove={() => remove(index)}
+                                            name={name}
+                                            onRemove={remove}
                                         />
                                     </Collapse.Panel>
                                 ))}

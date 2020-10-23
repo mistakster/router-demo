@@ -31,7 +31,11 @@ const CheckboxRow = ({ value, onChange, list }) => {
     return (
         <div>
             {list.map(item => (
-                <Checkbox key={item.id} onChange={handleChange(item.id)} checked={value.indexOf(item.id) >= 0}>
+                <Checkbox
+                    key={item.id}
+                    onChange={handleChange(item.id)}
+                    checked={value.indexOf(item.id) >= 0}
+                >
                     {item.name}
                 </Checkbox>
             ))}
@@ -39,16 +43,20 @@ const CheckboxRow = ({ value, onChange, list }) => {
     );
 };
 
-const MySuperControl = ({ panel, onRemove }) => {
+const MySuperControl = ({ name, onRemove }) => {
+    const handleRemove = useCallback(() => {
+        onRemove(name);
+    }, [onRemove, name]);
+
     return (
         <div>
-            <Form.Item name={[panel.name, 'providers']}>
+            <Form.Item name={[name, 'providers']}>
                 <CheckboxRow list={providers}/>
             </Form.Item>
-            <Form.Item name={[panel.name, 'locations']}>
+            <Form.Item name={[name, 'locations']}>
                 <CheckboxRow list={locations}/>
             </Form.Item>
-            <Button onClick={onRemove}>
+            <Button onClick={handleRemove}>
                 Remove
             </Button>
         </div>
